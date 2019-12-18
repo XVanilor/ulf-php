@@ -1,3 +1,4 @@
 /.idea
 /App/env.json
 /vendor
+/startServer.bat

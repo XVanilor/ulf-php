@@ -4,15 +4,6 @@ namespace App\Modules;
 
 use PDO;
 use PDOException;
-use PDOStatement;
-use App\Core\Helper;
-
-/**
- *
- * Class Database
- * @package App\Modules
- *
- */
 
 class Database extends PDO
 {
@@ -66,34 +57,19 @@ class Database extends PDO
      * @param string $sql
      * @param array $datas The inputs you want to throw in your SQL request
      *
-     * @return PDOStatement
+     * @return array
      **/
-    public function request(string $sql, array $datas = NULL){
+    public function request(string $sql, array $datas){
 
         $request = \PDOStatement::class;
         $this->beginTransaction();
         try{
             $request = $this->prepare($sql);
             $request->execute($datas);
-            $this->commit();
         }
         catch (PDOException $e){
-            var_dump($e->getMessage());
             $this->rollBack();
-            exit();
         }
-        return $request;
-    }
-
-    public function findOne(string $sql, array $datas = NULL){
-        $request = $this->request($sql, $datas);
-
-        return $request->fetch();
-    }
-
-    public function findMany(string $sql, array $datas = NULL){
-        $request = $this->request($sql, $datas);
-
         return $request->fetchAll();
     }
 
