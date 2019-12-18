@@ -1,0 +1,10 @@
+{
+  "DEBUG": 1,
+
+  "MYSQL_DB": {
+    "HOST": "",
+    "DB": "",
+    "USER": "",
+    "PASSWORD": ""
+  }
+}
