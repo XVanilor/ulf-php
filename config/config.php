@@ -2,6 +2,7 @@
 
 return [
 
+    "app_name" => "RH website",
     "paths" => [
         "views" => "../pages/front/",
         "back" => "../pages/back/",

@@ -3,7 +3,7 @@
 //Start session
 if(!session_id()) @session_start();
 
-require_once "../App/StartupInc.php";
+require_once "../App/Startup.php";
 
 //uri = explode("/", strip_tags($_SERVER['REQUEST_URI'])); Future update
 $uri = strtok(strtok(strip_tags($_SERVER['REQUEST_URI']), "?"), "&");
