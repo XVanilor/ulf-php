@@ -8,13 +8,13 @@ interface ModelInterface {
 
     /**
      * Create a new Model instance in DB
-     * @return void
+     * @return mixed
      */
     public function create();
 
     /**
      * Update a Model instance in DB
-     * @return void
+     * @return mixed
      */
     public function update();
 
@@ -22,22 +22,16 @@ interface ModelInterface {
      * Retrieve a Model instance from DB
      *
      * @param int $id
-     * @return object
+     * @return mixed
      */
-    public function get(int $id);
+    public static function get(int $id);
 
     /**
      * Delete a Model instance from DB
      *
-     * @return void
+     * @param int $id
+     * @return mixed
      */
-    public function delete();
-
-    /**
-     * Retrieve all entries of Model from DB
-     *
-     * @return array
-     */
-    public function all();
+    public static function delete(int $id);
 
 }
