@@ -4,6 +4,8 @@ namespace App\Modules;
 
 use PDO;
 use PDOException;
+use PDOStatement;
+use App\Core\Helper;
 
 class Database extends PDO
 {
@@ -59,15 +61,17 @@ class Database extends PDO
      *
      * @return array
      **/
-    public function request(string $sql, array $datas){
+    public function request(string $sql, array $datas = NULL){
 
         $request = \PDOStatement::class;
         $this->beginTransaction();
         try{
             $request = $this->prepare($sql);
             $request->execute($datas);
+            $this->commit();
         }
         catch (PDOException $e){
+            var_dump($e->getMessage());
             $this->rollBack();
         }
         return $request->fetchAll();
