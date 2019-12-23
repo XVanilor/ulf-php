@@ -1,7 +1,5 @@
 <?php
 
-use App\Core\ErrorHandler\ErrorHandler;
-
 /**
  *
  * File-linkage functions

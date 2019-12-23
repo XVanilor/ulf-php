@@ -6,15 +6,17 @@ namespace App\Core;
  * Class Helper
  * @package App\Core
  *
- * TODO
- * Use static for each methods instead of using object context
  */
 
 class Helper
 {
 
-    protected $config;
-    protected static $configPath = self::getRelativeRoot()."config/";
+    private static $properties;
+
+    private static function getStaticVars(){
+        self::$properties["configPath"] = self::getRelativeRoot()."config/";
+        self::$properties["config"] = "";
+    }
 
     public static function getEnv($var = NULL){
 
@@ -58,9 +60,9 @@ class Helper
      */
     public static function getConfig(){
         global $config;
-        if (!$config) {
-            self::$config = self::mergeConfigs();
-        }
+        if (!$config)
+            return self::mergeConfigs();
+
         return $config;
     }
 
@@ -78,11 +80,12 @@ class Helper
         global $config;
         if(!$config)
             $config = array();
+        self::getStaticVars();
 
-        $configFiles = array_diff(scandir(self::$configPath), array(".",".."));
+        $configFiles = array_diff(scandir(self::$properties['configPath']), array(".",".."));
 
         foreach($configFiles as $configFile)
-            if(is_array($configContent = include_once $this->configPath.$configFile))
+            if(is_array($configContent = include_once self::$properties['configPath'].$configFile))
                 foreach ($configContent as $key => $item)
                         $config[$key] = $item;
 
