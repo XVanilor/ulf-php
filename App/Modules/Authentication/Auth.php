@@ -6,29 +6,38 @@ use App\Modules\Authentication\Models\User;
 use App\Modules\Database;
 
 /**
-* TODO
-* Improve password hashing and verification algorithm
-**/
+ *
+ * Class Auth
+ * @package App\Modules\Authentication
+ *
+ */
 
 class Auth {
+
+    /**
+     * Authentication DB table
+     *
+     */
+    protected $table = "users";
+
     /**
      * Log a user and create session instance
      *
      *
      * Developer MUST provides only credential tokens into $credentials
      * $credentials must contains :
-     *      - All authorized login fields plaintext values provided in $config['auth']['auth_fields']
-     *      - A password or any unique and secret authentication token
+     *      - Login field plaintext value provided identified by "login" array key
+     *      - A password or any unique and secret authentication token identified by "password" array key
      *
      * @param array $credentials
      *
-     * @return User|boolean depending on authentication attempt succeed or not
+     * @return User|boolean depending if authentication attempt succeed or not
      **/
-    protected function login(array $credentials){
+    public function login(array $credentials){
 
-        if(($id = $this->loginAttempt($credentials)) !== false) {
+        if(($id = $this->loginAttempt($credentials)) !== false)
             return User::get($id);
-        }
+
         return false;
 
     }
@@ -44,26 +53,21 @@ class Auth {
 
         global $config;
         $db = new Database();
+        $passwordColumn = $config['auth']['password_column'];
 
-        $sql = "SELECT id, password WHERE ";
+        $sql = "SELECT id, ".$passwordColumn." FROM ".$this->table." WHERE ";
         foreach($config['auth']['authorized_login_columns'] as $key => $field) {
-            $sql .= $field . " = ?";
-            if($key !== array_key_last($config['auth']['login_fields']))
+            $sql .= $field . " = ? ";
+            if($key !== array_key_last($config['auth']['authorized_login_columns']))
                 $sql .= " OR ";
         }
 
         $sql .= "LIMIT 1"; //Only get the first row that login match
-        $user = $db->request($sql, $credentials);
+        $user = $db->findOne($sql, [$credentials["login"]]);
 
-        /**
-         * @todo
-         *
-         * Check $user return values
-         *
-         */
-        if(!empty($user))
-            if(password_verify($credentials['password'], $user[$config['auth']['password_field']]))
-                return $user['id'];
+        if($user instanceof \stdClass)
+            if(password_verify($credentials["password"], $user->$passwordColumn))
+                return $user->id;
 
         return false;
     }

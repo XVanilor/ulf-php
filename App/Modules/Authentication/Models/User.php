@@ -6,34 +6,35 @@ use App\Modules\Authentication\Auth;
 use App\Modules\Database;
 use App\Modules\ModelInterface;
 
+/**
+ *
+ * Class User
+ * @package App\Modules\Authentication\Models
+ *
+ */
+
 class User extends Auth implements ModelInterface {
 
     /**
-     * DB-related vars
      *
-     */
-    private $table;
-
-    /**
-     * User-related vars
-     * Var names are similar to column names
+     * User vars
      *
      */
     public $first_name;
     public $last_name;
-    public $email;
-    public $plainPassword;
-    private $cipherPassword;
+    public  $email;
+    public $password;
 
     /**
+     *
      * User constructor.
+     * Defines by default plainPassword & cipherPassword empty
      *
      */
     public function __construct()
     {
-        $this->table = "users";
-        $this->plainPassword = NULL;
-        $this->cipherPassword = NULL;
+        $this->plainPassword = "";
+        $this->cipherPassword = "";
     }
 
     public function create()
@@ -42,18 +43,21 @@ class User extends Auth implements ModelInterface {
         global $config;
         $db = new Database();
 
-        $this->cipherPassword = password_hash(
-            $this->plainPassword,
+        /**
+         * Hash password using configured hashing algorithm.
+         * PLEASE USE A STRONG ONE LIKE ARGON2ID OR SHA2/3-256/512
+         */
+        $this->password = password_hash(
+            $this->password,
             $config['auth']['password_hashing']['algo']
         );
-        $this->plainPassword = NULL;
 
         $db->request("INSERT INTO ".$this->table ." (first_name, last_name, email, password) VALUES(?,?,?,?)",
             [
                 $this->first_name,
                 $this->last_name,
                 $this->email,
-                $this->cipherPassword
+                $this->password
             ]);
 
     }
