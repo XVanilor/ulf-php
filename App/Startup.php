@@ -11,3 +11,11 @@ require_once '../vendor/autoload.php';
 
 //Global variables & Functions
 require_once "../App/Core/GlobalVars.php";
+
+/**
+ * TODO
+ * Improve custom functions inclusion
+ */
+$customFunctions = array_diff(scandir($config['paths']['modules']."Functions/"), array(".", ".."));
+foreach($customFunctions as $customFunction)
+    include_once $config['paths']['modules']."Functions/".$customFunction;
