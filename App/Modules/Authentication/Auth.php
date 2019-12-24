@@ -35,8 +35,10 @@ class Auth {
      **/
     public function login(array $credentials){
 
-        if(($id = $this->loginAttempt($credentials)) !== false)
-            return User::get($id);
+        if(($id = $this->loginAttempt($credentials)) !== false) {
+            $user = new User();
+            return $user->get($id);
+        }
 
         return false;
 
