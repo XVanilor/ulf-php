@@ -17,7 +17,7 @@ use App\Modules\ModelInterface;
 class User extends Auth implements ModelInterface {
 
     /**
-     * User vars
+     * User properties
      * @var string
      */
     public $id;
@@ -32,8 +32,8 @@ class User extends Auth implements ModelInterface {
      * DB-related vars
      *
      */
-    private $db;
 
+    private $primaryKey = "id";
     /**
      *
      * Column names in DB
@@ -46,15 +46,28 @@ class User extends Auth implements ModelInterface {
 
     /**
      *
-     * Columns that are not retrieved when User()->get or User->all() method is called
+     * Columns that are not retrieved when get() or all() method is called
      * @var array
      *
      */
     private $hidden = [
         "password"
     ];
+    /**
+     *
+     * Selectable vars by DB using get() or all()
+     * @var array
+     *
+     */
     private $requestables;
-    private $primaryKey = "id";
+
+    /**
+     *
+     * Updatable vars using update()
+     * @var array
+     *
+     */
+    private $updatables;
 
     /**
      *
@@ -65,8 +78,8 @@ class User extends Auth implements ModelInterface {
     public function __construct()
     {
         $this->password = "";
-        $this->db = new Database();
-        $this->requestables = implode(", ",array_diff($this->columns, $this->hidden));
+        $this->requestables = array_diff($this->columns, $this->hidden);
+        $this->updatables = array_diff($this->requestables, [$this->primaryKey]);
     }
 
     /**
@@ -78,7 +91,8 @@ class User extends Auth implements ModelInterface {
      */
     public function create()
     {
-        $this->db->request("INSERT INTO ".$this->table." ".$this->columns." VALUES(?,?,?,?,?)",
+        $db = new Database();
+        $db->request("INSERT INTO ".$this->table." ".$this->columns." VALUES(?,?,?,?,?)",
             [
                 $this->first_name,
                 $this->last_name,
@@ -86,27 +100,33 @@ class User extends Auth implements ModelInterface {
                 $this->hashedPassword(),
                 0
             ]);
+
+        $db = NULL;
         return;
     }
 
     /**
-     * Update User vars in DB except password, which must be called separately
+     *
+     * Update User vars in DB except password, which must be updated separately
      *
      * @return void
      *
      */
     public function update()
     {
+        $db = new Database();
 
         $sql = "UPDATE ".$this->table." SET ";
-        foreach($this->columns as $key => $column) {
-            $sql .= $column . " = ?";
-            if($key !== array_key_last($this->columns))
-                $sql .= ", ";
+        foreach($this->updatables as $key => $updatable) {
+            $sql .= $updatable . " = ?";
+            if($key !== array_key_last($this->updatables))
+                $sql .= ",";
+            $sql .= " ";
         }
 
         $sql .= "WHERE ".$this->primaryKey." = ?";
-        $this->db->request($sql,
+        var_dump($sql);
+        $db->request($sql,
             [
                 $this->first_name,
                 $this->last_name,
@@ -115,6 +135,8 @@ class User extends Auth implements ModelInterface {
                 $this->id
             ]
         );
+
+        $db = NULL;
         return;
     }
 
@@ -128,15 +150,20 @@ class User extends Auth implements ModelInterface {
     public function updatePassword()
     {
         global $config;
-        $this->db->request("UPDATE ".$this->table." SET ".$config['auth']['password_column']." = ? WHERE ".$this->primaryKey." = ?",
+        $db = new Database();
+
+        $db->request("UPDATE ".$this->table." SET ".$config['auth']['password_column']." = ? WHERE ".$this->primaryKey." = ?",
             [
                 $this->hashedPassword(),
                 $this->id
             ]);
 
+        $db = NULL;
+        return;
     }
 
     /**
+     *
      * Retrieve a single user from DB using it's ID
      *
      * @param int $id
@@ -146,11 +173,13 @@ class User extends Auth implements ModelInterface {
      */
     public function get(int $id)
     {
-        $datas = $this->db->findOne("SELECT ".$this->requestables." FROM ".$this->table." WHERE ".$this->primaryKey." = ?", [$id]);
+        $db = new Database();
+        $datas = $db->findOne("SELECT ".implode(", ", $this->requestables)." FROM ".$this->table." WHERE ".$this->primaryKey." = ?", [$id]);
 
-        foreach(explode(", ", $this->requestables) as $requestable)
+        foreach($this->requestables as $requestable)
             $this->$requestable = $datas->$requestable;
 
+        $db = NULL;
         return $this;
     }
 
@@ -160,6 +189,7 @@ class User extends Auth implements ModelInterface {
     }
 
     /**
+     *
      * Retrieve all users from DB
      *
      * @return array
@@ -167,7 +197,12 @@ class User extends Auth implements ModelInterface {
      */
     public function all()
     {
-        return $this->findMany("SELECT ".$this->requestables." FROM ".$this->table);
+        $db = new Database();
+
+        $users = $db->findMany("SELECT ".$this->requestables." FROM ".$this->table);
+        $db = NULL;
+
+        return $users;
     }
 
     /**
