@@ -1,5 +1,7 @@
 <?php
 
+use App\Core\Helper;
+
 /**
  *
  * File-linkage functions
@@ -9,14 +11,15 @@
 /**
  * Get an asset by it's relative path to assets folder
  *
- * @param $path
+ * @param string $path
+ *
  * @return void
  *
  **/
 
 if(!function_exists('assets')){
-    function assets($path){
-        return "./assets/".$path;
+    function assets(string $path){
+        return Helper::getAbsoluteRoot()."assets/".$path;
     }
 }
 
@@ -25,6 +28,7 @@ if(!function_exists('assets')){
  *
  * @param string $name
  * @param array $datas
+ *
  * @return void
  *
  **/
@@ -40,15 +44,16 @@ if(!function_exists("layout")){
 /**
  * Get a controller by it's name
  *
- * @param $name
+ * @param string $name
+ *
  * @return void
  *
  **/
 
 if(!function_exists("controller")){
-    function controller($name){
+    function controller(string $name){
         global $config;
-        require_once $config['paths']['back'].$name.".php";
+        include $config['paths']['back'].$name.".php";
         return;
     }
 }
@@ -56,13 +61,14 @@ if(!function_exists("controller")){
 /**
  * Get a module by it's name
  *
- * @param $name
+ * @param string $name
+ *
  * @return void
  *
  **/
 
 if(!function_exists("module")){
-    function module($name){
+    function module(string $name){
         global $config;
         require_once $config['paths']['modules'].$name.".php";
         return;
@@ -72,7 +78,8 @@ if(!function_exists("module")){
 /**
  * Get all available routes
  *
- * @param string
+ * @param string $name
+ *
  * @return array
  *
  **/
@@ -82,4 +89,43 @@ if(!function_exists("routes")){
         global $config;
         return require_once $config['paths']['routes']."routes.php";
     }
+}
+
+/**
+ * Retrieve a view by it's name/relative path to view path configured in config/config.php
+ *
+ * @param string $name
+ * @param array $datas
+ *
+ * @return string
+ */
+if(!function_exists("view")){
+    function view(string $name, array $datas = NULL){
+        global $config;
+        if($datas)
+            extract($datas);
+        require_once $config['paths']['views'].$name.".php" ;
+        return;
+    }
+}
+
+/**
+ *
+ * This function secures a string before displaying into views, avoiding
+ * common vulnerabilities such as XSS injection.
+ * ALWAYS use it when you have to render ANY USER DATA or NON-DEV DATA
+ *
+ * @param string $string
+ *
+ * @return string
+ *
+ */
+if(!function_exists("sec")){
+
+    function sec(string $string){
+
+        return htmlentities($string, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+    }
+
 }
