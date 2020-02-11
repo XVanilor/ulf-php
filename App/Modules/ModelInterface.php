@@ -29,10 +29,9 @@ interface ModelInterface {
     /**
      * Delete a Model instance from DB
      *
-     * @param int $id
      * @return void
      */
-    public function delete(int $id);
+    public function delete();
 
     /**
      * Retrieve all entries of Model from DB
