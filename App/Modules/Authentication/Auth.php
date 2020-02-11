@@ -4,6 +4,7 @@ namespace App\Modules\Authentication;
 
 use App\Modules\Authentication\Models\User;
 use App\Modules\Database;
+use App\Core\Helper;
 
 /**
  *
@@ -31,13 +32,14 @@ class Auth {
      *
      * @param array $credentials
      *
-     * @return User|boolean depending if authentication attempt succeed or not
+     * @return boolean depending if authentication attempt succeed or not
      **/
     public function login(array $credentials){
 
         if(($id = $this->loginAttempt($credentials)) !== false) {
             $user = new User();
-            return $user->get($id);
+            $_SESSION['user'] = $user->get($id);
+            return true;
         }
 
         return false;
@@ -72,6 +74,24 @@ class Auth {
                 return $user->id;
 
         return false;
+    }
+
+    /**
+     * Return the current authenticated user, NULL if not
+     *
+     * @return mixed|null
+     * @throws \ReflectionException
+     */
+    public static function user(){
+
+
+        if(isset($_SESSION["user"])){
+            $user = Helper::castObject(User::class, $_SESSION['user']);
+            return $user;
+        }
+
+        return NULL;
+
     }
 
 }

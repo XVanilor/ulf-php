@@ -92,7 +92,7 @@ class User extends Auth implements ModelInterface {
     public function create()
     {
         $db = new Database();
-        $db->request("INSERT INTO ".$this->table." ".$this->columns." VALUES(?,?,?,?,?)",
+        $db->request("INSERT INTO ".$this->table." (".implode(", ", array_diff($this->columns, [$this->primaryKey])).") VALUES(?,?,?,?,?)",
             [
                 $this->first_name,
                 $this->last_name,
@@ -125,7 +125,6 @@ class User extends Auth implements ModelInterface {
         }
 
         $sql .= "WHERE ".$this->primaryKey." = ?";
-        var_dump($sql);
         $db->request($sql,
             [
                 $this->first_name,
@@ -183,9 +182,15 @@ class User extends Auth implements ModelInterface {
         return $this;
     }
 
-    public function delete(int $id)
+    public function delete()
     {
-        // TODO: Implement delete() method.
+        $db = new Database();
+        $db->request("DELETE FROM ".$this->table." WHERE ".$this->primaryKey." = ?",
+            [
+                $this->id
+            ]);
+        $db = null;
+        return;
     }
 
     /**
@@ -199,7 +204,7 @@ class User extends Auth implements ModelInterface {
     {
         $db = new Database();
 
-        $users = $db->findMany("SELECT ".$this->requestables." FROM ".$this->table);
+        $users = $db->findMany("SELECT ".implode(", ", $this->requestables)." FROM ".$this->table);
         $db = NULL;
 
         return $users;
@@ -223,4 +228,5 @@ class User extends Auth implements ModelInterface {
 
         return $this->password;
     }
+
 }

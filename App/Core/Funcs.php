@@ -19,7 +19,7 @@ use App\Core\Helper;
 
 if(!function_exists('assets')){
     function assets(string $path){
-        return Helper::getAbsoluteRoot()."assets/".$path;
+        return Helper::getRelativeRoot()."assets/".$path;
     }
 }
 

@@ -14,13 +14,23 @@ use ReflectionException;
 class Helper
 {
 
+    /**
+     * @var static $properties
+     */
     private static $properties;
 
+    /**
+     *
+     */
     private static function getStaticVars(){
         self::$properties["configPath"] = self::getRelativeRoot()."config/";
         self::$properties["config"] = "";
     }
 
+    /**
+     * @param null $var
+     * @return mixed
+     */
     public static function getEnv($var = NULL){
 
         $env = json_decode(file_get_contents(self::getRelativeRoot()."App/env.json"), true);
@@ -105,10 +115,16 @@ class Helper
         return include_once '../pages/front/errors/404.php';
     }
 
+    /**
+     * @return string
+     */
     public static function getAbsoluteRoot(){
         return str_replace("\\", "/", dirname(dirname(__DIR__)))."/";
     }
 
+    /**
+     * @return string
+     */
     public static function getRelativeRoot(){
         return "../";
     }
@@ -120,6 +136,7 @@ class Helper
      * @param object $sourceObject
      *
      * @return object
+     * @throws ReflectionException
      */
     public static function castObject($destination, $sourceObject)
     {
