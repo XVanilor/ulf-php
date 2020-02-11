@@ -77,13 +77,13 @@ class Auth {
     }
 
     /**
+     * CURRENTLY IN DEV
      * Return the current authenticated user, NULL if not
      *
      * @return mixed|null
      * @throws \ReflectionException
-     */
+     *
     public static function user(){
-
 
         if(isset($_SESSION["user"])){
             $user = Helper::castObject(User::class, $_SESSION['user']);
@@ -93,5 +93,6 @@ class Auth {
         return NULL;
 
     }
+     * */
 
 }
