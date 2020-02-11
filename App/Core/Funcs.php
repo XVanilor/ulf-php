@@ -53,7 +53,7 @@ if(!function_exists("layout")){
 if(!function_exists("controller")){
     function controller(string $name){
         global $config;
-        include $config['paths']['back'].$name.".php";
+        include $config['paths']['controllers'].$name."Controller.php";
         return;
     }
 }
