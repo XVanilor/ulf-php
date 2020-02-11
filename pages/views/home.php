@@ -1,16 +1,16 @@
-<?= controller("HomeB"); ?>
-
 <!DOCTYPE html>
 <html wtx-context="9D8095EB-E564-4336-8897-EB2D2D3DD588" lang="en">
 
     <?= layout("head"); ?>
 
-    <body id="page-top" style="background-color: #000000">
+    <body id="page-top" style="background-color: #000000; min-height: 100vh">
 
         <!-- Header -->
-        <header class="masthead d-flex" style="background-image: url('<?= assets("img/banner_dark.jfif")?>') !important;
+        <header class="masthead d-flex" style="background: url('<?= assets("img/banner_dark.jfif")?>') no-repeat;
+                background-size: cover;
                 color: #ffffff;
-                font-size: 20px; !important" >
+                font-size: 20px; !important;
+                min-height: 90vh">
             <div class="container text-center my-auto">
                 <h1 class="mb-1">Ultra-Light Framework</h1>
                 <h3 class="mb-5">
@@ -25,11 +25,8 @@
             <div class="container">
                 <ul class="list-inline mb-5">
                     <li class="list-inline-item">
-                        <a style="background-color: rgb(255,255,255);
-                                  background-image: url('<?= assets("/img/gitlab_logo.png"); ?>');
-                                  background-size: 80px 80px;
-                                  background-repeat: no-repeat;
-                                  background-position: center;"
+                        <a style="background: url('<?= assets("img/gitlab_logo.png"); ?>') no-repeat center;
+                                background-size: 80px 80px;"
                            class="social-link rounded-circle text-white mr-3"
                            href="https://gitlab.com/Vanilor/ulf-php"
                            target="_blanck">
