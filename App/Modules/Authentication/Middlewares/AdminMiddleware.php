@@ -11,8 +11,9 @@ class AdminMiddleware implements MiddlewareInterface {
         public static function handleRequest()
         {
             if(AuthMiddleware::handleRequest() === true)
-                if($_SESSION['user']->is_admin === 1)
+                if($_SESSION['user']->is_admin == 1)
                     return true;
+
             return false;
         }
 
