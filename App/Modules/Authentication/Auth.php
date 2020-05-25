@@ -37,8 +37,10 @@ class Auth {
     public function login(array $credentials){
 
         if(($id = $this->loginAttempt($credentials)) !== false) {
+
             $user = new User();
             $_SESSION['user'] = $user->get($id);
+
             return true;
         }
 
@@ -77,22 +79,18 @@ class Auth {
     }
 
     /**
-     * CURRENTLY IN DEV
      * Return the current authenticated user, NULL if not
      *
-     * @return mixed|null
+     * @return Object|null
      * @throws \ReflectionException
-     *
+     */
     public static function user(){
 
-        if(isset($_SESSION["user"])){
-            $user = Helper::castObject(User::class, $_SESSION['user']);
-            return $user;
-        }
+        if(isset($_SESSION["user"]))
+            return $_SESSION['user'];
 
         return NULL;
 
     }
-     * */
 
 }

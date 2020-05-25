@@ -13,7 +13,29 @@ require_once '../vendor/autoload.php';
 require_once "../App/Core/GlobalVars.php";
 
 /**
- * TODO
+ * Retrieve all modules dirs
+ */
+$modules = [];
+foreach(glob($path = $config['paths']['modules']."*", GLOB_ONLYDIR) as $dir) {
+    array_push($modules, $config['paths']['modules'].basename($dir));
+}
+$modules = array_diff($modules, [$config['paths']['modules']."Functions"]);
+
+
+/**
+ * Retrieve all modules functions
+ */
+
+foreach ($modules as $module) {
+
+    if (file_exists( $funcs = $module . "/Functions.php")) {
+        include_once $funcs;
+    }
+}
+
+
+/**
+ * @TODO
  * Improve custom functions inclusion
  */
 $customFunctions = array_diff(scandir($config['paths']['modules']."Functions/"), array(".", ".."));

@@ -53,7 +53,7 @@ if(!function_exists("layout")){
 if(!function_exists("controller")){
     function controller(string $name){
         global $config;
-        include $config['paths']['controllers'].$name."Controller.php";
+        include $config['paths']['back'].$name.".php";
         return;
     }
 }
@@ -104,6 +104,7 @@ if(!function_exists("view")){
         global $config;
         if($datas)
             extract($datas);
+
         require_once $config['paths']['views'].$name.".php" ;
         return;
     }
@@ -125,6 +126,17 @@ if(!function_exists("sec")){
     function sec(string $string){
 
         return htmlentities($string, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+    }
+
+}
+
+if(!function_exists("dd")){
+
+    function dd($var){
+
+        var_dump($var);
+        die;
 
     }
 

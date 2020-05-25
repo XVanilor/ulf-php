@@ -96,6 +96,13 @@ class User extends Auth implements ModelInterface {
             [
                 $this->first_name,
                 $this->last_name,
+                $this->gender,
+                $this->salary,
+                $this->birthdate,
+                $this->birthplace,
+                $this->job,
+                $this->service,
+                $this->manager,
                 $this->email,
                 $this->hashedPassword(),
                 0
@@ -129,6 +136,13 @@ class User extends Auth implements ModelInterface {
             [
                 $this->first_name,
                 $this->last_name,
+                $this->gender,
+                $this->salary,
+                $this->birthdate,
+                $this->birthplace,
+                $this->job,
+                $this->service,
+                $this->manager,
                 $this->email,
                 $this->is_admin,
                 $this->id
@@ -173,10 +187,14 @@ class User extends Auth implements ModelInterface {
     public function get(int $id)
     {
         $db = new Database();
-        $datas = $db->findOne("SELECT ".implode(", ", $this->requestables)." FROM ".$this->table." WHERE ".$this->primaryKey." = ?", [$id]);
+        $sql = "SELECT ".implode(", ", $this->requestables)." FROM ".$this->table." WHERE ".$this->primaryKey." = ?";
 
-        foreach($this->requestables as $requestable)
-            $this->$requestable = $datas->$requestable;
+        $datas = $db->findOne($sql, [$id]);
+
+        $this->first_name = $datas->first_name;
+        $this->last_name = $datas->last_name;
+        $this->email = $datas->email;
+        $this->is_admin = $datas->is_admin;
 
         $db = NULL;
         return $this;
