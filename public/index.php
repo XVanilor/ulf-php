@@ -10,7 +10,7 @@ if(!session_id())
 $uri = strtok(strtok(strip_tags($_SERVER['REQUEST_URI']), "?"), "&");
 
 //Remove the end / if so
-if(substr($uri, -1, 1) === "/")
+if((substr($uri, -1, 1) === "/") && $uri !== "/")
     $uri = substr($uri, 0, strlen($uri)-1);
 
 array_key_exists($uri, $routes) ? include_once $config["paths"]['controllers'].$routes[$uri].".php" : include_once $config["paths"]["controllers"].$routes["/404"].".php";

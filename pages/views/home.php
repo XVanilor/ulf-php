@@ -1,5 +1,3 @@
-<?= controller("HomeB"); ?>
-
 <!DOCTYPE html>
 <html wtx-context="9D8095EB-E564-4336-8897-EB2D2D3DD588" lang="en">
 
