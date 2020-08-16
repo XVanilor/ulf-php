@@ -7,6 +7,6 @@
     <title><?= $config['app_name']; ?><?= (isset($data["page_name"])) ? " - ".$data['page_name'] : "" ?></title>
 
     <link rel="stylesheet" type="text/css" href="<?= assets("css/bootstrap.min.css"); ?>" />
-    <link rel="stylesheet" type="text/css" href="<?= assets("css/custom.min.css"); ?>" />
+    <link rel="stylesheet" type="text/css" href="<?= assets("css/app.css"); ?>" />
 
 </head>
