@@ -4,11 +4,11 @@ return [
 
     "app_name" => "RH website",
     "paths" => [
-        "views" => "../pages/views/",
-        "controllers" => "../pages/Controllers/",
-        "layouts" => "../resources/layouts/",
-        "modules" => "../App/Modules/",
-        "routes" => "../routes/"
+        "controllers"   => "../App/Controllers/",
+        "modules"       => "../App/Modules/",
+        "views"         => "../resources/views/",
+        "layouts"       => "../resources/layouts/",
+        "routes"        => "../routes/"
     ]
 
 ];
