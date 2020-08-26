@@ -1,0 +1,13 @@
+{
+    "require": {
+        "php": "^7.3",
+        "ext-json": "*",
+        "ext-pdo": "*",
+        "vanilor/ulf-php-core": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "vendor/"
+        }
+    }
+}

@@ -1,0 +1,58 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "89de583c66427e5104ac99ff0e30e5ba",
+    "packages": [
+        {
+            "name": "vanilor/ulf-php-core",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/Vanilor/ulf-php-core.git",
+                "reference": "fc784f3d99857bed2a4c197fdf140ebb36a97941"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/Vanilor%2Fulf-php-core/repository/archive.zip?sha=fc784f3d99857bed2a4c197fdf140ebb36a97941",
+                "reference": "fc784f3d99857bed2a4c197fdf140ebb36a97941",
+                "shasum": ""
+            },
+            "type": "framework",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vanilor",
+                    "email": "dev@vanilor.info",
+                    "homepage": "https://vaniolr.info",
+                    "role": "Maintainer"
+                }
+            ],
+            "keywords": [
+                "PHP7",
+                "php",
+                "u-lf"
+            ],
+            "time": "2020-08-25T18:44:07+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "vanilor/ulf-php-core": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": "^7.3",
+        "ext-json": "*",
+        "ext-pdo": "*"
+    },
+    "platform-dev": []
+}
