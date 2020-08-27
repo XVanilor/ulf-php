@@ -6,7 +6,7 @@
     <body id="page-top" style="background-color: #000000">
 
         <!-- Header -->
-        <header class="masthead d-flex" style="background-image: url('<?= assets("img/banner_dark.jfif")?>') !important;
+        <header class="masthead d-flex" style="background-image: url('<?= asset("img/banner_dark.jfif")?>') !important;
                 color: #ffffff;
                 font-size: 20px; !important" >
             <div class="container text-center my-auto">
@@ -24,7 +24,7 @@
                 <ul class="list-inline mb-5">
                     <li class="list-inline-item">
                         <a style="background-color: rgb(255,255,255);
-                                  background-image: url('<?= assets("/img/gitlab_logo.png"); ?>');
+                                  background-image: url('<?= asset("/img/gitlab_logo.png"); ?>');
                                   background-size: 80px 80px;
                                   background-repeat: no-repeat;
                                   background-position: center;"
