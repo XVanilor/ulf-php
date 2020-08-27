@@ -7,7 +7,6 @@ return [
         "modules"       => "../App/Modules/",
         "views"         => "../resources/views/",
         "layouts"       => "../resources/layouts/",
-        "config"        => "../config/",
         "routes"        => "../routes/"
     ]
 
