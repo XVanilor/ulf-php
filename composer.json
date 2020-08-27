@@ -3,6 +3,7 @@
     "description": "The Ultra-Light Framework PHP framework, made for a lighter and simpler web",
     "type": "framework",
     "license": "MIT",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Vanilor",
@@ -12,7 +13,8 @@
     "require": {
         "php": "^7.3",
         "ext-json": "*",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "vanilor/ulf-php-core": "dev-dev"
     },
     "autoload": {
         "psr-4": {

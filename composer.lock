@@ -4,12 +4,54 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4944c0a64fc1aed4019eb30d5bc1b12b",
-    "packages": [],
+    "content-hash": "cf3cb472a99d267bbdbedbb354431b0a",
+    "packages": [
+        {
+            "name": "vanilor/ulf-php-core",
+            "version": "dev-dev",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/Vanilor/ulf-php-core.git",
+                "reference": "dbd804e33a0cb6dac7d87f3ee03d1ae4a541178e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/Vanilor%2Fulf-php-core/repository/archive.zip?sha=dbd804e33a0cb6dac7d87f3ee03d1ae4a541178e",
+                "reference": "dbd804e33a0cb6dac7d87f3ee03d1ae4a541178e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*"
+            },
+            "type": "framework",
+            "autoload": {
+                "psr-4": {
+                    "": "src/"
+                },
+                "files": [
+                    "src/ULF/Core/Funcs.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vanilor",
+                    "email": "dev@vanilor.info"
+                }
+            ],
+            "description": "The core of the U-LF PHP framework",
+            "time": "2020-08-27T09:48:31+00:00"
+        }
+    ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "vanilor/ulf-php-core": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
