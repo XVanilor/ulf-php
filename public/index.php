@@ -1,16 +1,13 @@
 <?php
 
-require_once "../App/Startup.php";
+//Only load App classes, composer will load himself vendor classes
+spl_autoload_register(function ($class){
+    if(strpos($class, "App") !== false)
+        include_once "../" . str_replace("\\", "/", $class) . ".php";
+});
 
-//Start session
-if(!session_id())
-    session_start();
+//Loads Composer vendor
+require_once '../vendor/autoload.php';
 
-//$uri = strtok(strtok(strip_tags($_SERVER['REQUEST_URI']), "?"), "&");
-$uri = strtok(strtok(strip_tags($_SERVER['REQUEST_URI']), "?"), "&");
-
-//Remove the end / if so
-if((substr($uri, -1, 1) === "/") && $uri !== "/")
-    $uri = substr($uri, 0, strlen($uri)-1);
-
-array_key_exists($uri, $routes) ? include_once $config["paths"]['controllers'].$routes[$uri].".php" : include_once $config["paths"]["controllers"].$routes["/404"].".php";
+$core = new \ULF\Core\ULF();
+$core->run();
