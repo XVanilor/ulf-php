@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf3cb472a99d267bbdbedbb354431b0a",
+    "content-hash": "fbf834f209c9ba5ce8f3d379212b9925",
     "packages": [
         {
             "name": "vanilor/ulf-php-core",
@@ -12,16 +12,17 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/Vanilor/ulf-php-core.git",
-                "reference": "dbd804e33a0cb6dac7d87f3ee03d1ae4a541178e"
+                "reference": "ab33a5d35e7c0b3700cb886d50245974eb2f3056"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/Vanilor%2Fulf-php-core/repository/archive.zip?sha=dbd804e33a0cb6dac7d87f3ee03d1ae4a541178e",
-                "reference": "dbd804e33a0cb6dac7d87f3ee03d1ae4a541178e",
+                "url": "https://gitlab.com/api/v4/projects/Vanilor%2Fulf-php-core/repository/archive.zip?sha=ab33a5d35e7c0b3700cb886d50245974eb2f3056",
+                "reference": "ab33a5d35e7c0b3700cb886d50245974eb2f3056",
                 "shasum": ""
             },
             "require": {
-                "ext-json": "*"
+                "ext-json": "*",
+                "php": "^7.4"
             },
             "type": "framework",
             "autoload": {
@@ -43,7 +44,7 @@
                 }
             ],
             "description": "The core of the U-LF PHP framework",
-            "time": "2020-08-27T09:48:31+00:00"
+            "time": "2020-09-02T06:59:59+00:00"
         }
     ],
     "packages-dev": [],
@@ -55,7 +56,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3",
+        "php": "^7.4",
         "ext-json": "*",
         "ext-pdo": "*"
     },
