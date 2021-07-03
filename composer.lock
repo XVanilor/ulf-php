@@ -12,18 +12,19 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/Vanilor/ulf-php-core.git",
-                "reference": "ab33a5d35e7c0b3700cb886d50245974eb2f3056"
+                "reference": "ff1cfebab2e68ec0677b1beaaf9672f777ce79da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/Vanilor%2Fulf-php-core/repository/archive.zip?sha=ab33a5d35e7c0b3700cb886d50245974eb2f3056",
-                "reference": "ab33a5d35e7c0b3700cb886d50245974eb2f3056",
+                "url": "https://gitlab.com/api/v4/projects/Vanilor%2Fulf-php-core/repository/archive.zip?sha=ff1cfebab2e68ec0677b1beaaf9672f777ce79da",
+                "reference": "ff1cfebab2e68ec0677b1beaaf9672f777ce79da",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "php": "^7.4"
             },
+            "default-branch": true,
             "type": "framework",
             "autoload": {
                 "psr-4": {
@@ -44,7 +45,10 @@
                 }
             ],
             "description": "The core of the U-LF PHP framework",
-            "time": "2020-09-02T06:59:59+00:00"
+            "support": {
+                "issues": "https://gitlab.com/api/v4/projects/20739249/issues"
+            },
+            "time": "2021-03-24T08:46:48+00:00"
         }
     ],
     "packages-dev": [],
@@ -60,5 +64,6 @@
         "ext-json": "*",
         "ext-pdo": "*"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.1.0"
 }
