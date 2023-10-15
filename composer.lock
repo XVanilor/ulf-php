@@ -4,14 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fbf834f209c9ba5ce8f3d379212b9925",
+    "content-hash": "8b57bae9bf4cafaa7ed78b2359da97ee",
     "packages": [
         {
             "name": "vanilor/ulf-php-core",
             "version": "dev-dev",
             "source": {
                 "type": "git",
-                "url": "https://gitlab.com/Vanilor/ulf-php-core.git",
+                "url": "git@gitlab.com:Vanilor/ulf-php-core.git",
                 "reference": "ff1cfebab2e68ec0677b1beaaf9672f777ce79da"
             },
             "dist": {
@@ -27,12 +27,12 @@
             "default-branch": true,
             "type": "framework",
             "autoload": {
-                "psr-4": {
-                    "": "src/"
-                },
                 "files": [
                     "src/ULF/Core/Funcs.php"
-                ]
+                ],
+                "psr-4": {
+                    "": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -45,9 +45,6 @@
                 }
             ],
             "description": "The core of the U-LF PHP framework",
-            "support": {
-                "issues": "https://gitlab.com/api/v4/projects/20739249/issues"
-            },
             "time": "2021-03-24T08:46:48+00:00"
         }
     ],
@@ -60,10 +57,10 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4",
+        "php": "<=8.2",
         "ext-json": "*",
         "ext-pdo": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }
